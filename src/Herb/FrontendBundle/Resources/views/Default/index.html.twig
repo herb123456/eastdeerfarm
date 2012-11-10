@@ -1,1 +1,148 @@
-Hello {{ name }}!
+{# src/Herb/FrontendBundle/Resources/views/Default/index.html.twig #}
+{% extends 'HerbFrontendBundle::layout.html.twig' %}
+
+{% block title %} 鹿場介紹 - {{ parent() }} {% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/herbfrontend/css/shadowbox.css') }}">
+
+    <style type="text/css" >
+        .imgText{
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #sb-title-inner{
+            color: black;
+        }    
+    </style>
+    
+{% endblock %}
+
+{% block content %}
+    
+    <div style="width:80%; margin-left: auto ;margin-right: auto ;">
+    
+        <div id="imgFlow" class="carousel slide">
+          {% if indexPics %}
+              <div class="carousel-inner"><!-- Carousel items -->
+                
+                
+                
+                    {% for pic in indexPics %}
+                        <div class="{% if loop.index == 1 %}active{% endif %} item">
+                            <img src="{{ asset('indexPic/' ~ pic.ipFilename) }}" alt="" width="100%" />
+                            {% if pic.ipDescription %}
+                                <div class="carousel-caption">
+                                    <h4>{{ pic.ipDescription }}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+
+
+              </div>
+              
+              <!-- Carousel nav -->
+              <a class="carousel-control left" href="#imgFlow" data-slide="prev">&lsaquo;</a>
+              <a class="carousel-control right" href="#imgFlow" data-slide="next">&rsaquo;</a>
+          {% endif %}
+        </div>
+    
+    </div>
+    
+    <div class="row-fluid">
+        
+        <div class="span8">
+            <h3>
+            <p>本人姓彭名晟育，現在農場的鹿舍有22隻公母小鹿，<span style="color: red">位於花蓮縣壽豐鄉，溪口發電廠的後方，玉里醫院復健園區的對面</span>，靠山邊，空氣清晰，
+            早上有猴子、雉雞、竹雞、各種鳥類，晚上有兔子、螢火蟲，天氣比較冷的時候，還有山豬會下來與你請安問好，
+            那問好的意思就是破壞農作物啦～還有多種青蛙、蛇類。</p>
+            <p>目前有機農場裡種植的有咖啡、櫻桃、楊桃、山葡萄、三葉五加、草食蠶、羊奶頭、桔子、柳丁、柚子、香蕉、玉米、花生、丹蔘、洛神葵、山藥。
+            </p>
+            <p>
+            我只想用最古老辛苦的方式，去種植最<span style="color: red">天然、無毒</span>。而現在政府正在提昌的<span style="color: red">有機式栽培、有機養殖</span>，
+            讓我鹿兒們吃得健康，長出最優質最好的鹿茸，泡出最好的鹿茸酒，研磨出最好的鹿茸粉，吃到最好吃的鹿肉，
+            給我們鹿茸愛好者與會照顧他人保養自己身體的朋友們。</p>
+            
+            <p>同時也請各位朋友來幫幫忙，一起來監視養鹿戶，是不是有作好<span style="color: red">每星期三的消毒日</span>，讓我們的鹿隻更強壯、更健康，
+            畢竟鹿茸是吃下肚的，還有最重要的提醒各位客戶朋友們，
+            買鹿茸一定要去他的鹿場<span style="color: red">看三次、衛生、消毒</span>，看你想買的鹿茸的鹿隻是否健康，才下訂金購買。
+            謝謝各位客戶、朋友們的支持。
+            </p>
+            </h3>
+            
+            <center>
+                <a href="{{ asset('bundles/herbfrontend/images/big4.jpg') }}" rel="shadowbox" title="結業證書" class="certificate">
+                    <img src="{{ asset('bundles/herbfrontend/images/big4.jpg') }}" alt="" width="70%" class="img-rounded img-polaroid" />
+                </a>
+                <div class="imgText">
+                    <b>結業證書</b>
+                </div>
+            </center>
+        </div>
+        
+        <div class="span4">
+            <a href="{{ asset('bundles/herbfrontend/images/SANY0816.jpg') }}" rel="shadowbox" title="有機農產品驗證證書" class="certificate">
+                <img src="{{ asset('bundles/herbfrontend/images/SANY0816.jpg') }}" alt="" width="100%" class="img-rounded img-polaroid" />
+            </a>
+            <div class="imgText">
+                <b>有機農產品驗證證書</b>
+            </div>
+            
+            <a href="{{ asset('bundles/herbfrontend/images/SANY0821.jpg') }}" rel="shadowbox" title="有機農產品驗證證書" class="certificate">
+                <img src="{{ asset('bundles/herbfrontend/images/SANY0821.jpg') }}" alt="" width="100%" class="img-rounded img-polaroid" />
+            </a>
+            <div class="imgText">
+                <b>有機農產品驗證證書</b>
+            </div>
+            
+            <a href="{{ asset('bundles/herbfrontend/images/SANY0823.jpg') }}" rel="shadowbox" title="農民農業專業訓練結業證書" class="certificate">
+                <img src="{{ asset('bundles/herbfrontend/images/SANY0823.jpg') }}" alt="" width="100%" class="img-rounded img-polaroid" />
+            </a>
+            <div class="imgText">
+                <b>農民農業專業訓練結業證書</b>
+            </div>
+            
+        </div>
+        
+    </div>  
+      
+    
+
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('bundles/herbfrontend/js/shadowbox.js') }}"></script>
+
+    <script>
+        $(function(){
+            $('#imgFlow').carousel({
+                interval: 2000
+            });
+            
+            Shadowbox.init({
+                skipSetup: true
+            });
+            
+            Shadowbox.setup("a.certificate", {
+                gallery: "certificate",
+                continuous: true,
+                counterType: "skip",
+                onFinish: function(){
+                    $("img#sb-player").click(function(){
+                        if(Shadowbox.hasNext()){
+                            Shadowbox.next();
+                        }
+                    }).css("cursor", "pointer");
+                }
+            }); 
+        });
+    </script>
+{% endblock %}

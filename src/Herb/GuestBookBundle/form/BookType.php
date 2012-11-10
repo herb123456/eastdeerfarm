@@ -1,41 +1,34 @@
 <?php
 
-namespace Herb\FrontendBundle\Form\Type;
+namespace Acme\BookBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class indexPicEditType extends AbstractType
+class BookType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('ipFilename', "file", array("required" => false));
-        $builder->add('ipDescription', "textarea", array("required" => false));
+        $builder->add('bookName', 'text');
+        $builder->add('bookEmail', 'email');
+        $builder->add('bookContent', 'textarea');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Herb\FrontendBundle\Model\indexPic',
+            'data_class'      => 'Acme\FrontendBundle\model\book',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             // a unique key to help generate the secret token
-            'intention'       => 'indexpic',
+            'intention'       => 'BookBundle',
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
-        return 'indexpic';
+        return 'book';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\FrontendBundle\Form\Type;
+namespace Herb\FrontendBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +23,7 @@ class indexPicType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Acme\FrontendBundle\Model\indexPic',
+            'data_class' => 'Herb\FrontendBundle\Model\indexPic',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             // a unique key to help generate the secret token

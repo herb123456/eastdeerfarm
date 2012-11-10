@@ -1,0 +1,222 @@
+{# src/Herb/FrontendBundle/Resources/views/Default/index.html.twig #}
+{% extends 'HerbFrontendBundle::layout.html.twig' %}
+
+{% block title %}
+    產品介紹 - {{ parent() }}
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+
+    <link href="{{ asset('bundles/herbfrontend/css/masonry.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/herbfrontend/css/jquery-ui-1.9.1.custom.min.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .outsideBox{
+            -moz-box-sizing: border-box;
+            border: 1px dashed #B3B3B3;
+            float: left;
+            margin-right: -1px;
+            padding: 8px;
+            width: 290px;
+        }
+        
+        .outsideBox .insideBox{
+            background: none repeat scroll 0 0 white;
+            border-radius: 12px 12px 12px 12px;
+            box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+            line-height: 1.5;
+            margin: 0;
+            overflow: hidden;
+            padding: 16px 16px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .outsideBox .insideBox .itemBox .item-desc{
+            margin-bottom: 12px;
+            margin-top: 7px;
+            text-align: center;
+            background-color: #eee;
+        }
+        
+        .outsideBox .insideBox .itemBox .purchase-info{
+            border-top: 2px dashed #DDDDDD;
+            font-family: Avenir,'Helvetica Neue',Helvetica,Arial,sans-serif;
+            padding-bottom: 8px;
+            padding-top: 8px;
+        }
+        
+        .outsideBox .insideBox .itemBox .purchase-info .info-price{
+            font-size: 20px;
+            font-weight: 500;
+            text-align: right;
+        }
+        
+        .outsideBox .insideBox .itemBox .purchase-info .info-price .label-currency{
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        #page-nav{
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    
+    <div class="row">
+            <div id="masonry" class="feed-wrap masonry transitions-enabled infinite-scroll clearfix">
+                
+                
+                {% for item in result %}
+                    <div class="outsideBox">
+                        <div class="insideBox">
+                            <div class="itemBox">
+                                {% if item.prodUrl %}
+                                    <a href="{{ item.prodUrl }}" target="_blank">
+                                        <img width="192" height="192" title="{{ item.prodName }}" src="{{ asset('bundles/herbfrontend/images/products/' ~ item.prodPic) }}" alt="{{ item.prodName }} - 花蓮 - 全國養鹿場">
+                                    </a>
+                                {% else %}
+                                    <img width="192" height="192" title="{{ item.prodName }}" src="{{ asset('bundles/herbfrontend/images/products/' ~ item.prodPic) }}" alt="{{ item.prodName }} - 花蓮 - 全國養鹿場">
+                                {% endif %}
+                                    
+                                
+                                <div class="item-desc">
+                                    {{ item.prodName }}<br>
+                                    {% if item.prodCatgory %}
+                                        
+                                        <a href="{{ item.prodUrl }}" alt="{{ item.prodName }} - 花蓮 - 全國養鹿場" catgory="{{ item.prodCatgory }}" onClick="openWindow(event, this)">
+                                             {{ item.getProductType.getptName }} 的功效
+                                        </a>
+                                      
+                                    {% endif %}
+                                    
+                                </div>
+                                <div class="purchase-info">
+                                    <div class="info-price">
+                                        <span class="label-currency">NT$ </span>
+                                        {{ item.prodPrice }} / 
+                                        <span class="label-currency">{{ item.prodUnit }} </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+                
+                
+            
+            
+            
+            </div> <!--masonry-->
+        </div> <!-- /row -->
+    </div> <!-- /container -->
+    
+    <nav id="page-nav">
+      {{ pagerfanta(thePager) }}
+    </nav>
+    
+    <div id="dialog"></div>
+
+
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/herbfrontend/js/jquery.masonry.min.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('bundles/herbfrontend/js/jquery.infinitescroll.min.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('bundles/herbfrontend/js/jquery-ui-1.9.0.custom.min.js') }}" type="text/javascript" charset="utf-8"></script>
+
+    <script>
+        var $container = $('#masonry');
+        
+        $container.imagesLoaded(function(){
+          $container.masonry({
+            itemSelector: '.outsideBox',
+            isAnimated: !0
+          });
+        });
+        
+        
+        $container.infinitescroll({
+            //navSelector: ".pagination",
+            //nextSelector: ".next.next_page a",
+            navSelector  : '#page-nav',    // selector for the paged navigation 
+            nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
+            itemSelector : '.outsideBox',     // selector for all items you'll retrieve
+            loading: {
+                  finishedMsg: 'No more pages to load.',
+                  img: 'http://i.imgur.com/6RMhx.gif'
+                }
+            },
+            // trigger Masonry as a callback
+            function( newElements ) {
+                // hide new items while they are loading
+                var $newElems = $( newElements ).css({ opacity: 0 });
+                // ensure that images load before adding to masonry layout
+                $newElems.imagesLoaded(function(){
+                  // show elems now they're ready
+                  $newElems.animate({ opacity: 1 });
+                  $container.masonry( 'appended', $newElems, true ); 
+                });
+            }
+        );
+        
+        // $("#masonry .item-desc a").click(function (event){
+        //     var dataObj = $(this),
+        //         openwindow = $("#dialog");
+
+        //     event.preventDefault();
+
+            
+
+        //     var dialogOptions = {
+        //         title: dataObj.attr("alt"),
+        //         modal: true,
+        //         height: 500,
+        //         width: 800,
+        //         closeText: "Close",
+        //         open: function() {
+        //             $(this).load( "{{ path("pdeff") }}" + "/" + dataObj.attr("catgory") );
+        //         }
+        //     };
+
+        //     openwindow.dialog( dialogOptions );
+        //     openwindow.dialog("open");
+
+        // });
+
+        function openWindow( event, DOM ){
+            var dataObj = $(DOM),
+                openwindow = $("#dialog");
+
+            event.preventDefault();
+
+            
+
+            var dialogOptions = {
+                title: dataObj.attr("alt"),
+                modal: true,
+                height: 500,
+                width: 800,
+                closeText: "Close",
+                open: function() {
+                    $(this).load( "{{ path("pdeff") }}" + "/" + dataObj.attr("catgory") );
+                }
+            };
+
+            openwindow.dialog( dialogOptions );
+            openwindow.dialog("open");
+
+        }
+
+
+        
+
+    </script>
+{% endblock %}
