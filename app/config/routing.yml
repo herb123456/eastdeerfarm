@@ -1,7 +1,12 @@
-herb_frontend:
-    resource: "@HerbFrontendBundle/Controller/"
-    type:     annotation
-    prefix:   /
+# herb_guest_book:
+#     resource: "@HerbGuestBookBundle/Controller/"
+#     type:     annotation
+#     prefix:   /
+
+# herb_frontend:
+#     resource: "@HerbFrontendBundle/Controller/"
+#     type:     annotation
+#     prefix:   /
 
 # Internal routing configuration to handle ESI
 #_internal:

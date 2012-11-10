@@ -74,5 +74,23 @@ CREATE TABLE `edf_productType`
     PRIMARY KEY (`pt_id`)
 ) ENGINE=InnoDB CHARACTER SET='utf8';
 
+-- ---------------------------------------------------------------------
+-- edf_book
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `edf_book`;
+
+CREATE TABLE `edf_book`
+(
+    `book_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+    `book_name` VARCHAR(100) NOT NULL,
+    `book_email` VARCHAR(100),
+    `book_content` TEXT NOT NULL,
+    `book_answer` TEXT,
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    PRIMARY KEY (`book_id`)
+) ENGINE=InnoDB CHARACTER SET='utf8';
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

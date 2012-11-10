@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Propel\PropelBundle\PropelBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Herb\FrontendBundle\HerbFrontendBundle(),
+            new Herb\GuestBookBundle\HerbGuestBookBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
