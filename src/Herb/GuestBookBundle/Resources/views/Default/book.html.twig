@@ -1,0 +1,95 @@
+{# src/Herb/BookBundle/Resources/views/Default/book.html.twig #}
+{% extends 'HerbFrontendBundle::layout.html.twig' %}
+
+{% block title %}
+    問題留言 - {{ parent() }}
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    <style>
+        #msgcontent{
+            margin-left: 15%
+        }
+        .msg{
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-style: dotted;
+            width: 70%
+        }
+        .msghead{
+            border-bottom-style: solid ;
+            border-width: 1px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .headdate, .headname{
+            display: inline;
+            font-size: 20px;
+            line-height: 25px;
+        }
+        .headdate{
+            padding-left: 20px;
+        }
+        .headname{
+            padding-left: 20%;
+        }
+        
+        .msgbody{
+            padding: 10px 10px 20px 10px;
+            border-bottom-style: solid ;
+            border-width: 1px;
+        }
+        .anshead{
+            padding: 10px 10px 0px 10px;
+        }
+        .anscontent{
+            padding: 10px 10px 10px 40px;
+            color: red;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="msgbtn">
+            <button class="btn btn-large btn-primary" type="button" onClick="location.href='{{ path("sendmsg") }}'">我要留言</button>
+        </div>
+        
+        <div id="msgcontent">
+            
+            {% for msg in result %}
+                <div class="msg">
+                    <div class="msghead">
+                        <div class="headdate">{{ msg.getCreatedAt | date('Y-m-d') }}</div>
+                        <div class="headname">{{ msg.bookName }}</div>
+                    </div>
+                    
+                    <div class="msgbody">
+                        {{ msg.bookContent | nl2br }}
+                    </div>
+                    
+                    {% if msg.bookAnswer %}
+                        <div class="msgans">
+                            <div class="anshead">
+                                農場主人回覆:
+                            </div>
+                            <div class="anscontent">
+                                <p>
+                                {{ msg.bookAnswer | nl2br }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            
+            
+            
+            <nav id="page-nav">
+              {{ pagerfanta(thePager, 'twitter_bootstrap_translated') }}
+            </nav>
+        </div>
+    
+{% endblock %}

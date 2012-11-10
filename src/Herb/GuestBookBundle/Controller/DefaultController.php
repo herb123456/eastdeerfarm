@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Symfony\Component\HttpFoundation\Response;
+
 // for pagination
 use Pagerfanta\Adapter\PropelAdapter;
 use Pagerfanta\Pagerfanta;
@@ -50,9 +52,7 @@ class DefaultController extends Controller
         $book = new Book();
         $form = $this->createForm(new BookType(), $book);
 
-        // return $this->render('AcmeLibraryBundle:Book:new.html.twig', array(
-        //     'form' => $form->createView(),
-        // ));
+        
         return array('form' => $form->createView());
     }
 
@@ -73,7 +73,7 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $book->save();
                 
-                return $this->render("HerbGuestBookBundle:Default:sendok.html.twig");
+                return new Response('<script>alert("留言成功！");location.href="'.$this->generateUrl("book").'";</script>');
             }else{
                 return $this->redirect($this->generateUrl('book'));
             }

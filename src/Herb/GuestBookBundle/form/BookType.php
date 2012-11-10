@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\BookBundle\Form;
+namespace Herb\GuestBookBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +19,7 @@ class BookType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => 'Acme\FrontendBundle\model\book',
+            'data_class'      => 'Herb\FrontendBundle\model\book',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             // a unique key to help generate the secret token

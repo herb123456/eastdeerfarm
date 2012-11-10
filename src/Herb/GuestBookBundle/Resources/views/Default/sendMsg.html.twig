@@ -1,0 +1,44 @@
+{# src/Herb/BookBundle/Resources/views/Default/sendmsg.html.twig #}
+{% extends 'HerbFrontendBundle::layout.html.twig' %}
+
+{% block title %}
+    問題留言 - {{ parent() }}
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    <style>
+        .book_leave_table{
+            width: 60%;
+            text-align: center;
+            margin-left: 15%;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <form action="{{ path("sendto") }}" method="POST" {{ form_enctype(form) }} >
+        <table class="table book_leave_table">
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookName">姓名：</label></td>
+                <td>{{ form_widget(form.bookName, {'attr': {'placeholder': "請輸入你的暱稱"} }) }} </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookEmail">E-mail：</label></td>
+                <td>{{ form_widget(form.bookEmail, {'attr': {'placeholder': "請輸入你的聯絡方式"} }) }}</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookContent">留言內容：</label></td>
+                <td>{{ form_widget(form.bookContent, {'attr': {'placeholder': "請輸入留言內容或想問的問題", 'rows': "8"} }) }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><input class="btn btn-large btn-primary" type="submit" value="送出留言"></td>
+            </tr>
+        </table>
+        {{ form_rest(form) }}
+    </form>
+
+    
+{% endblock %}
