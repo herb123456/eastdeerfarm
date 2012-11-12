@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Herb\FrontendBundle\HerbFrontendBundle(),
             new Herb\GuestBookBundle\HerbGuestBookBundle(),
+            new Herb\BackendBundle\HerbBackendBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

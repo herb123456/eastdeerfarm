@@ -1,3 +1,8 @@
+# herb_backend:
+#     resource: "@HerbBackendBundle/Controller/"
+#     type:     annotation
+#     prefix:   /
+
 # herb_guest_book:
 #     resource: "@HerbGuestBookBundle/Controller/"
 #     type:     annotation

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}全國養鹿場 - 後台管理系統{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Le styles -->
+  <link href="{{ asset("bundles/herbfrontend/css/bootstrap.css") }}" rel="stylesheet">
+  {% block css %}
+      
+  {% endblock %}
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- Le fav and touch icons -->
+  <link rel="shortcut icon" href="./ico/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="./ico/apple-touch-icon-57-precomposed.png"></head>
+
+<body>
+
+<form class="form-horizontal" action='{{ path("login_check") }}' method="POST">
+  <fieldset>
+    <div id="legend">
+      <legend class="">Login</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Username</label>
+      <div class="controls">
+        <input type="text" id="_username" name="_username" placeholder="" class="input-xlarge">
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" for="password">Password</label>
+      <div class="controls">
+        <input type="password" id="_password" name="_password" placeholder="" class="input-xlarge">
+      </div>
+    </div>
+ 
+ 
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+      	<input type="hidden" name="_target_path" value="{{ url("adminIndex") }}" />
+		<input type="submit" name="" value="GO!" class="btn btn-success">
+        <!-- <button class="btn btn-success">Login</button> -->
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+<!-- Le javascript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="{{ asset("bundles/herbfrontend/js/jquery.js") }}"></script>
+  <script src="{{ asset("bundles/herbfrontend/js/bootstrap.js") }}"></script>
+
+</body>
+</html>

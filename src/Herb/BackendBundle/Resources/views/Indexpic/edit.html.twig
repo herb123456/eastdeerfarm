@@ -1,0 +1,40 @@
+{% extends 'HerbBackendBundle::backend.layout.html.twig' %}
+{% block css %}
+    <style>
+    	.errorMsg{
+    		border: 3px red dotted;
+    		font-size: 15px;
+    		line-height: 23px;
+    		margin-left: 200px;
+    		padding-left: 100px;
+    	}
+    </style>
+{% endblock %}
+
+{% block content %}
+	{% if uploadErrorMsg %}
+		<div class="errorMsg">
+			 {{ uploadErrorMsg }} 
+		</div>
+	{% endif %}
+    <form action="{{ path("editIndexpic") ~ "/" ~ id }}" method="POST" {{ form_enctype(form) }} >
+        <table class="table book_leave_table">
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookName">原始圖片：</label></td>
+                <td> <img src="{{ asset("indexPic/") ~ form.vars.value.ipFilename }}" alt="" width="752"> </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookEmail">修改為：（若不修改圖片請留空）</label></td>
+                <td>{{ form_widget(form.ipFilename) }}</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookContent">簡介：</label></td>
+                <td>{{ form_widget(form.ipDescription) }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><input class="btn btn-large btn-primary" type="submit" value="修改"></td>
+            </tr>
+        </table>
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}

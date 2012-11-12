@@ -22,3 +22,12 @@ herb_frontend:
     resource: "@HerbFrontendBundle/Controller/DefaultController.php"
     type:     annotation
     prefix:   /
+
+herb_backend:
+    resource: "@HerbBackendBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /aaddmmiinnppaaggee
+
+herb_backend_indexpic:
+    resource: "@HerbBackendBundle/Controller/IndexpicController.php"
+    type: annotation
