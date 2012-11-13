@@ -1,0 +1,70 @@
+{% extends 'HerbBackendBundle::backend.layout.html.twig' %}
+{% block content %}
+    
+
+    <div class="btn-toolbar">
+      <button class="btn btn-primary" onClick="location.href='{{ path("newProducts") }}' ">新增產品</button>
+
+    </div>
+    <div class="">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>產品名稱</th>
+            <th>產品價錢</th>
+            <th>產品類別</th>
+            <th>產品網址</th>
+            <th>產品圖片</th>
+            <th>修改 / 刪除</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for prod in products %}
+              <tr>
+                <td style="cursor: pointer;" onClick="location.href='{{ path("editProducts") ~ '/' ~ prod.prodId }}'">
+                  <!-- 名稱 -->
+                  {{ prod.prodName }}
+                </td>
+                
+                <td style="cursor: pointer;" onClick="location.href='{{ path("editProducts") ~ '/' ~ prod.prodId }}'">
+                  <!-- 價錢 -->
+                  $ {{ prod.prodPrice }} / {{ prod.prodUnit }}
+                </td>
+                
+                <td style="cursor: pointer;" onClick="location.href='{{ path("editProducts") ~ '/' ~ prod.prodId }}'">
+                  <!-- 類別 -->
+                  {{ prod.getProductType.getptName }}
+                </td>
+
+                <td style="cursor: pointer;" onClick="location.href='{{ path("editProducts") ~ '/' ~ prod.prodId }}'">
+                  <!-- 網址 -->
+                  {{ prod.prodUrl }}
+                </td>                  
+
+                <td style="cursor: pointer;" onClick="location.href='{{ path("editProducts") ~ '/' ~ prod.prodId }}'">
+                  <img src="{{ asset("products/" ~ prod.prodPic) }}" alt="" width="192" height="">
+                </td>
+                
+                <td>
+                  <a href="{{ path("editProducts") ~ '/' ~ prod.prodId }}">
+                    <i class="icon-pencil"></i>
+                  </a>
+                  <a href="{{ path("deleteProducts") ~ '/' ~ prod.prodId }}" role="button" data-toggle="modal" onClick="return confirm('確定要刪除嗎？')">
+                    <i class="icon-remove"></i>
+                  </a>
+                </td>
+              </tr>
+          {% endfor %}
+          
+          
+          
+        </tbody>
+      </table>
+    </div>
+    
+    <nav id="page-nav">
+      {{ pagerfanta(thePager, 'twitter_bootstrap_translated') }}
+    </nav>
+    
+    
+{% endblock %}

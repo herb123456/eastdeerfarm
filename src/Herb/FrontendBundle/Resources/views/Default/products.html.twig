@@ -76,10 +76,10 @@
                             <div class="itemBox">
                                 {% if item.prodUrl %}
                                     <a href="{{ item.prodUrl }}" target="_blank">
-                                        <img width="192" height="192" title="{{ item.prodName }}" src="{{ asset('bundles/herbfrontend/images/products/' ~ item.prodPic) }}" alt="{{ item.prodName }} - 花蓮 - 全國養鹿場">
+                                        <img width="192" height="192" title="{{ item.prodName }}" src="{{ asset('products/' ~ item.prodPic) }}" alt="{{ item.prodName }} - 花蓮 - 全國養鹿場">
                                     </a>
                                 {% else %}
-                                    <img width="192" height="192" title="{{ item.prodName }}" src="{{ asset('bundles/herbfrontend/images/products/' ~ item.prodPic) }}" alt="{{ item.prodName }} - 花蓮 - 全國養鹿場">
+                                    <img width="192" height="192" title="{{ item.prodName }}" src="{{ asset('products/' ~ item.prodPic) }}" alt="{{ item.prodName }} - 花蓮 - 全國養鹿場">
                                 {% endif %}
                                     
                                 

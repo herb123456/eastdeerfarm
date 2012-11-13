@@ -179,6 +179,7 @@ class IndexpicController extends Controller
                     // upload image
                     list($newFileName, $hasError, $errorMsg) = $uploadAndResize->handleUploadImage($file, $new_width, $new_height);
                     if (!$hasError) {
+                        unlink( __DIR__."/../../../../web/".$this->upload_dir.$originName );
                         $pic->setipFilename($newFileName);
                     }else{
                         $pic->setipFilename($originName);
@@ -189,7 +190,6 @@ class IndexpicController extends Controller
                 }
 
                 if(!$hasError){
-                    unlink( __DIR__."/../../../../web/".$this->upload_dir.$originName );
                     $pic->save();    
                     return $this->redirect($this->generateUrl("adminIndexpic"));
                 }else{

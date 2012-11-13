@@ -1,0 +1,54 @@
+{% extends 'HerbBackendBundle::backend.layout.html.twig' %}
+{% block css %}
+    <style>
+    	.errorMsg{
+    		border: 3px red dotted;
+    		font-size: 15px;
+    		line-height: 23px;
+    		margin-left: 200px;
+    		padding-left: 100px;
+    	}
+    </style>
+{% endblock %}
+
+{% block content %}
+	{% if uploadErrorMsg %}
+		<div class="errorMsg">
+			 {{ uploadErrorMsg }} 
+		</div>
+	{% endif %}
+    
+    <form action="{{ path("newProducts") }}" method="POST" {{ form_enctype(form) }} >
+        <table class="table book_leave_table">
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookContent">產品名稱：</label></td>
+                <td>{{ form_widget(form.prodName) }}</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookContent">產品價錢：</label></td>
+                <td>$ {{ form_widget(form.prodPrice, {'attr': {'size': 1}}) }} / {{ form_widget(form.prodUnit) }}</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookContent">產品類別：</label></td>
+                <td>{{ form_widget(form.prodCatgory) }}</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookContent">產品網址：</label></td>
+                <td>{{ form_widget(form.prodUrl) }}</td>
+            </tr>
+
+
+            <tr>
+                <td style="text-align:center;"><label class="control-label" for="book_bookEmail">產品圖片：</label></td>
+                <td>{{ form_widget(form.prodPic) }}</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td colspan="2" style="text-align:center;"><input class="btn btn-large btn-primary" type="submit" value="新增商品"></td>
+            </tr>
+        </table>
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}
