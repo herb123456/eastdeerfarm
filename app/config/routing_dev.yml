@@ -31,3 +31,7 @@ herb_backend:
 herb_backend_indexpic:
     resource: "@HerbBackendBundle/Controller/IndexpicController.php"
     type: annotation
+
+herb_backend_guest_book:
+    resource: "@HerbGuestBookBundle/Controller/AdminController.php"
+    type: annotation

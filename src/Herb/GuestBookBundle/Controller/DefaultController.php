@@ -27,6 +27,10 @@ class DefaultController extends Controller
      */
     public function bookAction($page)
     {
+        if($page == 0){
+            return $this->redirect($this->generateUrl("book")."/1");
+        }
+
         $maxPerPage = 6;
 
         $books = bookQuery::create()
