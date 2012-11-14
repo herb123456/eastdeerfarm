@@ -1,0 +1,54 @@
+{% extends 'HerbBackendBundle::backend.layout.html.twig' %}
+{% block content %}
+    
+
+    
+    <div class="">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>留言人</th>
+            <th>聯絡方式</th>
+            <th>留言內容</th>
+            <th>回復內容</th>
+            <th>回復 / 刪除</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+              <tr>
+                <td style="cursor: pointer;" onClick="location.href='{{ path("answerBook") ~ '/' ~ book.bookId }}'">
+                  {{ book.bookName }}
+                </td>
+                <td style="cursor: pointer;" onClick="location.href='{{ path("answerBook") ~ '/' ~ book.bookId }}'">
+                  {{ book.bookEmail }}
+                </td>
+                <td style="cursor: pointer;" onClick="location.href='{{ path("answerBook") ~ '/' ~ book.bookId }}'">
+                  {{ book.bookContent | nl2br }}
+                </td>
+                <td style="cursor: pointer;" onClick="location.href='{{ path("answerBook") ~ '/' ~ book.bookId }}'">
+                  {{ book.bookAnswer | nl2br }}
+                </td>
+                <td>
+                  <a href="{{ path("answerBook") ~ '/' ~ book.bookId }}">
+                    <i class="icon-pencil"></i>
+                  </a>
+                  <a href="{{ path("deleteBook") ~ '/' ~ book.bookId }}" role="button" data-toggle="modal" onClick="return confirm('確定要刪除嗎？')">
+                    <i class="icon-remove"></i>
+                  </a>
+                </td>
+              </tr>
+          {% endfor %}
+          
+          
+          
+        </tbody>
+      </table>
+    </div>
+    
+    <nav id="page-nav">
+      {{ pagerfanta(thePager, 'twitter_bootstrap_translated') }}
+    </nav>
+    
+    
+{% endblock %}

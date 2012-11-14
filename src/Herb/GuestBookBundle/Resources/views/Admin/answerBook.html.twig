@@ -1,0 +1,35 @@
+{% extends 'HerbBackendBundle::backend.layout.html.twig' %}
+{% block content %}
+    
+
+    
+    <div class="">
+      <form action="{{ path("answerBook") ~ "/" ~ book.bookId }}" method="POST" {{ form_enctype(form) }} >
+        <table class="table book_leave_table">
+              <tr>
+                  <td style="text-align:center;"><label class="control-label" for="book_bookName">姓名：</label></td>
+                  <td> {{ book.bookName }} </td>
+              </tr>
+              <tr>
+                  <td style="text-align:center;"><label class="control-label" for="book_bookEmail">E-mail：</label></td>
+                  <td>{{ book.bookEmail }}</td>
+              </tr>
+              <tr>
+                  <td style="text-align:center;"><label class="control-label" for="book_bookEmail">留言內容：</label></td>
+                  <td>{{ book.bookContent | nl2br }}</td>
+              </tr>
+              <tr>
+                  <td style="text-align:center;"><label class="control-label" for="book_bookContent">回復內容：</label></td>
+                  <td>{{ form_widget(form.bookAnswer, {'attr': {'placeholder': "請輸入回復內容", 'rows': "8"} }) }}</td>
+              </tr>
+              <tr>
+                  <td colspan="2" style="text-align:center;"><input class="btn btn-large btn-primary" type="submit" value="回復"></td>
+              </tr>
+          </table>
+          {{ form_rest(form) }}
+      </form>
+    </div>
+    
+    
+    
+{% endblock %}
